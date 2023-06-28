@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ReviewController extends Controller
 {
@@ -22,8 +24,8 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        $reviews = Review::all();
-        return view('reviews.create', compact('reviews'));
+        $movies = Movie::all();
+        return view('reviews.create', compact('movies'));
     }
 
     /**
@@ -32,7 +34,7 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'film' => 'required',
+            'movie_id' => 'required',
             'user' => 'required',
             'rating' => 'required|numeric',
             'review' => 'required',
@@ -57,9 +59,9 @@ class ReviewController extends Controller
      */
     public function edit(Review $review)
     {
-        $reviews = Review::all();
+        $movies = Movie::all();
 
-        return view('reviews.edit', compact('review'));
+        return view('reviews.edit', compact('review', 'movies'));
     }
 
     /**
@@ -68,7 +70,7 @@ class ReviewController extends Controller
     public function update(Request $request, Review $review)
     {
         $validatedData = $request->validate([
-            'film' => 'required',
+            'movie_id' => 'required',
             'user' => 'required',
             'rating' => 'required|numeric',
             'review' => 'required',

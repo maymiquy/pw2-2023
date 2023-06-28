@@ -28,8 +28,13 @@
                 @method('PUT')
 
                 <div class="form-group my-1">
-                    <label for="film">Film:</label><br>
-                    <input class="form-control" type="text" id="film" name="film" value="{{ $review->film }}">
+                    <label for="movie_id">Film:</label><br>
+                    <select class="form-select" id="movie_id" name="movie_id">
+                        @foreach ($movies as $movie)
+                            <option value="{{ $movie->id }}" {{ $movie->id == $movie->movie_id ? 'selected' : '' }}>
+                                {{ $movie->judul }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group my-1">
                     <label for="user">User:</label><br>
